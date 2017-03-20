@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!-- ====================================================================== -->
+<!-- Ant build file (http://ant.apache.org/) for Ant 1.6.2 or above.        -->
+<!-- ====================================================================== -->
+
+<project name="atech-invoice" default="package" basedir=".">
+
+	<!-- ====================================================================== -->
+	<!-- Import maven-build.xml into the current project                        -->
+	<!-- ====================================================================== -->
+
+	<import file="maven-build.xml"/>
+
+	<!-- ====================================================================== -->
+	<!-- Help target                                                            -->
+	<!-- ====================================================================== -->
+
+	<target name="help">
+		<echo message="Please run: $ant -projecthelp"/>
+	</target>
+
+	<target name="schemaexport" description="Exports a generated schema to DB and file">
+		<taskdef name="hibernatetool" classname="org.hibernate.tool.ant.EnversHibernateToolTask" classpathref="build.test.classpath" />
+
+		<hibernatetool destdir=".">
+			<classpath>
+				<fileset refid="lib.hibernate" />
+				<path location="${maven.build.dir}" />
+			</classpath>
+			<jpaconfiguration persistenceunit="AtechInvoicePU" />
+			<hbm2ddl drop="false" create="true" export="false" outputfilename="versioning-ddl.sql" delimiter=";" format="true" />
+		</hibernatetool>
+	</target>
+
+</project>
