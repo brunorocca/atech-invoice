@@ -1,0 +1,28 @@
+<div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
+	<h1 class="page-header">Notas Fiscais</h1>
+
+	<div class="table-responsive">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>Id</th>
+					<th>CNPJ Emissor</th>
+					<th>Descrição</th>
+					<th>Produtos</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr ng-repeat="invoice in invoices">
+					<td>{{invoice.id}}</td>
+					<td>{{invoice.cnpj}}</td>
+					<td>{{invoice.description}}</td>
+					<td>
+						<div ng-repeat="product in invoice.products">
+							{{product.productName}}
+						</div>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
